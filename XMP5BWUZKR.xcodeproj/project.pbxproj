@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		91632B13171DAF9C008A8793 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91632B12171DAF9C008A8793 /* AssetsLibrary.framework */; };
+		91632B15171DB25C008A8793 /* IMG_0005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91632B14171DB25C008A8793 /* IMG_0005.jpg */; };
+		91632B17172044E0008A8793 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91632B16172044E0008A8793 /* QuartzCore.framework */; };
 		91D15971171DABBA003313E0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D15970171DABBA003313E0 /* UIKit.framework */; };
 		91D15973171DABBA003313E0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D15972171DABBA003313E0 /* Foundation.framework */; };
 		91D15975171DABBA003313E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D15974171DABBA003313E0 /* CoreGraphics.framework */; };
@@ -19,9 +22,15 @@
 		91D1598A171DABBA003313E0 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91D15988171DABBA003313E0 /* MainStoryboard_iPhone.storyboard */; };
 		91D1598D171DABBA003313E0 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91D1598B171DABBA003313E0 /* MainStoryboard_iPad.storyboard */; };
 		91D15990171DABBA003313E0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D1598F171DABBA003313E0 /* ViewController.m */; };
+		91D1599F171DADE7003313E0 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D1599E171DADE7003313E0 /* CoreImage.framework */; };
+		91E516E6171DAE750051780B /* film5-exposed.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 91E516E3171DAE750051780B /* film5-exposed.JPG */; };
+		91E516E7171DAE750051780B /* film4.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 91E516E4171DAE750051780B /* film4.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		91632B12171DAF9C008A8793 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		91632B14171DB25C008A8793 /* IMG_0005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0005.jpg; sourceTree = "<group>"; };
+		91632B16172044E0008A8793 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		91D1596D171DABBA003313E0 /* XMP5BWUZKR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XMP5BWUZKR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91D15970171DABBA003313E0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		91D15972171DABBA003313E0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -39,6 +48,9 @@
 		91D1598C171DABBA003313E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		91D1598E171DABBA003313E0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		91D1598F171DABBA003313E0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		91D1599E171DADE7003313E0 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		91E516E3171DAE750051780B /* film5-exposed.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "film5-exposed.JPG"; sourceTree = "<group>"; };
+		91E516E4171DAE750051780B /* film4.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = film4.JPG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91632B17172044E0008A8793 /* QuartzCore.framework in Frameworks */,
+				91632B13171DAF9C008A8793 /* AssetsLibrary.framework in Frameworks */,
+				91D1599F171DADE7003313E0 /* CoreImage.framework in Frameworks */,
 				91D15971171DABBA003313E0 /* UIKit.framework in Frameworks */,
 				91D15973171DABBA003313E0 /* Foundation.framework in Frameworks */,
 				91D15975171DABBA003313E0 /* CoreGraphics.framework in Frameworks */,
@@ -58,6 +73,12 @@
 		91D15964171DABBA003313E0 = {
 			isa = PBXGroup;
 			children = (
+				91632B16172044E0008A8793 /* QuartzCore.framework */,
+				91632B12171DAF9C008A8793 /* AssetsLibrary.framework */,
+				91E516E3171DAE750051780B /* film5-exposed.JPG */,
+				91632B14171DB25C008A8793 /* IMG_0005.jpg */,
+				91E516E4171DAE750051780B /* film4.JPG */,
+				91D1599E171DADE7003313E0 /* CoreImage.framework */,
 				91D15976171DABBA003313E0 /* XMP5BWUZKR */,
 				91D1596F171DABBA003313E0 /* Frameworks */,
 				91D1596E171DABBA003313E0 /* Products */,
@@ -167,6 +188,9 @@
 				91D15987171DABBA003313E0 /* Default-568h@2x.png in Resources */,
 				91D1598A171DABBA003313E0 /* MainStoryboard_iPhone.storyboard in Resources */,
 				91D1598D171DABBA003313E0 /* MainStoryboard_iPad.storyboard in Resources */,
+				91E516E6171DAE750051780B /* film5-exposed.JPG in Resources */,
+				91E516E7171DAE750051780B /* film4.JPG in Resources */,
+				91632B15171DB25C008A8793 /* IMG_0005.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +298,10 @@
 		91D15994171DABBA003313E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XMP5BWUZKR/XMP5BWUZKR-Prefix.pch";
 				INFOPLIST_FILE = "XMP5BWUZKR/XMP5BWUZKR-Info.plist";
@@ -285,6 +313,10 @@
 		91D15995171DABBA003313E0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XMP5BWUZKR/XMP5BWUZKR-Prefix.pch";
 				INFOPLIST_FILE = "XMP5BWUZKR/XMP5BWUZKR-Info.plist";
@@ -312,6 +344,7 @@
 				91D15995171DABBA003313E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

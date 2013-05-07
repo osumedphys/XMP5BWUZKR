@@ -1,23 +1,193 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2519" systemVersion="12A206j" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1856"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller-->
         <scene sceneID="4">
             <objects>
                 <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="E6o-HD-Zgk">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="484" id="4Yi-gV-X6g"/>
+                                    <constraint firstAttribute="height" constant="648" id="QCE-ed-2G3"/>
+                                </constraints>
+                            </imageView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="3kS-Al-xSW">
+                                <connections>
+                                    <action selector="amountSliderValueChanged:" destination="2" eventType="valueChanged" id="aAC-jY-lzg"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LXv-jq-Do6">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Load Photo">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loadPhoto:" destination="2" eventType="touchUpInside" id="A5F-Iq-qKe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFf-5h-2oG">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Save to Album">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="savePhoto:" destination="2" eventType="touchUpInside" id="Ccg-P7-PrK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSg-TP-2wH">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Take a Photo">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="takePicture:" destination="2" eventType="touchUpInside" id="ZTL-Ga-aiw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyC-wj-9VV">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Select Area">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getThatArea:" destination="2" eventType="touchUpInside" id="BeG-an-APv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLF-j2-Gdx">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Get Pixel Info">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getPixelInfo:" destination="2" eventType="touchUpInside" id="iFe-NE-QyQ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Points:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="166" translatesAutoresizingMaskIntoConstraints="NO" id="c4J-6q-hUw">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Q4b-k7-hSM"/>
+                                    <constraint firstAttribute="width" constant="166" id="sOg-nS-dDa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EkX-2B-UiF">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="RESET IMAGE">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetImage:" destination="2" eventType="touchUpInside" id="ssh-l8-1w5"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="ImageInfo:" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="196" translatesAutoresizingMaskIntoConstraints="NO" id="csP-J3-K8G">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="196" id="c6C-Aq-qqw"/>
+                                    <constraint firstAttribute="height" constant="79" id="ndv-B4-cr2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRP-z1-NWn">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LXv-jq-Do6" firstAttribute="baseline" secondItem="fLF-j2-Gdx" secondAttribute="baseline" type="default" id="2dc-3g-RM8"/>
+                            <constraint firstAttribute="bottom" secondItem="csP-J3-K8G" secondAttribute="bottom" constant="54" id="3M1-EU-yyf"/>
+                            <constraint firstAttribute="bottom" secondItem="gRP-z1-NWn" secondAttribute="bottom" constant="111" id="5YC-wU-lhL"/>
+                            <constraint firstItem="3kS-Al-xSW" firstAttribute="centerX" secondItem="LXv-jq-Do6" secondAttribute="centerX" type="default" id="9Su-wF-wij"/>
+                            <constraint firstItem="DFf-5h-2oG" firstAttribute="baseline" secondItem="iyC-wj-9VV" secondAttribute="baseline" type="default" id="Ayt-cL-d7z"/>
+                            <constraint firstItem="LXv-jq-Do6" firstAttribute="leading" secondItem="iyC-wj-9VV" secondAttribute="leading" type="default" id="B7p-G2-QM1"/>
+                            <constraint firstItem="E6o-HD-Zgk" firstAttribute="top" secondItem="5" secondAttribute="top" constant="43" id="EGz-LO-NJU"/>
+                            <constraint firstItem="iyC-wj-9VV" firstAttribute="baseline" secondItem="EkX-2B-UiF" secondAttribute="baseline" type="default" id="Gvj-Mi-Ma6"/>
+                            <constraint firstAttribute="bottom" secondItem="3kS-Al-xSW" secondAttribute="bottom" constant="267" id="JBa-Dq-Jug"/>
+                            <constraint firstAttribute="trailing" secondItem="DFf-5h-2oG" secondAttribute="trailing" constant="110" id="Lns-LS-JSi"/>
+                            <constraint firstAttribute="bottom" secondItem="c4J-6q-hUw" secondAttribute="bottom" constant="71" id="OQT-43-hhw"/>
+                            <constraint firstItem="EkX-2B-UiF" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="144" id="So5-dh-F8M"/>
+                            <constraint firstItem="EkX-2B-UiF" firstAttribute="leading" secondItem="csP-J3-K8G" secondAttribute="leading" type="default" id="Uue-Hr-aAN"/>
+                            <constraint firstAttribute="bottom" secondItem="pSg-TP-2wH" secondAttribute="bottom" constant="196" id="Vp9-tY-81s"/>
+                            <constraint firstAttribute="trailing" secondItem="fLF-j2-Gdx" secondAttribute="trailing" constant="114" id="Xb4-w6-kB5"/>
+                            <constraint firstItem="LXv-jq-Do6" firstAttribute="baseline" secondItem="pSg-TP-2wH" secondAttribute="baseline" type="default" id="bOC-Vh-bAK"/>
+                            <constraint firstItem="pSg-TP-2wH" firstAttribute="leading" secondItem="EkX-2B-UiF" secondAttribute="leading" type="default" id="gSi-JO-GnS"/>
+                            <constraint firstItem="c4J-6q-hUw" firstAttribute="leading" secondItem="csP-J3-K8G" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ncK-uv-A5F"/>
+                            <constraint firstItem="E6o-HD-Zgk" firstAttribute="centerX" secondItem="3kS-Al-xSW" secondAttribute="centerX" type="default" id="nsf-Bc-4tU"/>
+                            <constraint firstAttribute="trailing" secondItem="3kS-Al-xSW" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="pVy-CQ-TZ9"/>
+                            <constraint firstItem="gRP-z1-NWn" firstAttribute="centerX" secondItem="DFf-5h-2oG" secondAttribute="centerX" type="default" id="u8E-eZ-Khs"/>
+                            <constraint firstItem="gRP-z1-NWn" firstAttribute="top" secondItem="DFf-5h-2oG" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="yGz-kc-xO1"/>
+                            <constraint firstItem="3kS-Al-xSW" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="zwM-hk-oh2"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="amountSlider" destination="3kS-Al-xSW" id="Z3s-Mt-D1Y"/>
+                        <outlet property="imageView" destination="E6o-HD-Zgk" id="OXG-k7-wiS"/>
+                        <outlet property="infoLabel" destination="csP-J3-K8G" id="sUG-kz-3Ud"/>
+                        <outlet property="ipadloadPhotoOutlet" destination="LXv-jq-Do6" id="seG-A6-Lkf"/>
+                        <outlet property="pointLabel" destination="c4J-6q-hUw" id="9vc-QR-rnr"/>
+                        <outlet property="saveLabel" destination="gRP-z1-NWn" id="CCS-hL-Y75"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="amountSliderValueChanged:"/>
+                <relationship kind="action" name="getPixelInfo:"/>
+                <relationship kind="action" name="getThatArea:"/>
+                <relationship kind="action" name="loadPhoto:"/>
+                <relationship kind="action" name="resetImage:"/>
+                <relationship kind="action" name="savePhoto:"/>
+                <relationship kind="action" name="takePicture:"/>
+                <relationship kind="outlet" name="amountSlider" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="infoLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ipadloadPhotoOutlet" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="pointLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="saveLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
