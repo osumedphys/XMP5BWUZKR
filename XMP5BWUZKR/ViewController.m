@@ -7,49 +7,33 @@
 //
 
 #import "ViewController.h"
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <QuartzCore/QuartzCore.h>
+#import "ImageProcessing.h"
 
 @interface ViewController () < UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @end
 
 @implementation ViewController
 CIContext *context;
-CIFilter *filter;
 CIImage *beginImage;
 CIImage *currentImage;
-UIImageOrientation orientation;
 @synthesize popoverController;
-UIPickerView *catergoryPicker;
-UIToolbar *pickerToolBar;
 CGRect selectionRect;
 NSMutableArray *points;
-float heightscale;
 float widthscale;
+float heightscale;
 float currentslidervalue;
-int measurecounter;
-NSArray *labels;
-NSMutableArray *redvalues;
-NSMutableArray *greenvalues;
-NSMutableArray *bluevalues;
-NSMutableArray *alphavalues;
 CAShapeLayer *rectLayer;
+UIAlertView* newFileDialog;
+UIImagePickerController* imagePicker;
 
+bool fileCreated;
 
--(void)logAllFilters {
-    NSArray *properties = [CIFilter filterNamesInCategory:
-                           kCICategoryBuiltIn];
-    NSLog(@"%@", properties);
-    for (NSString *filterName in properties) {
-        CIFilter *fltr = [CIFilter filterWithName:filterName];
-        NSLog(@"%@", [fltr attributes]);
-    }
-}
+//Declare Custom Tools
+ImageProcessing* imageProcessor;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //NSString *filePath = [[NSBundle mainBundle] pathForResource:@"image" ofType:@"png"];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_0005" ofType:@"jpg"];
     NSURL *fileNameAndPath = [NSURL fileURLWithPath:filePath];
     
@@ -57,19 +41,13 @@ CAShapeLayer *rectLayer;
     
     context = [CIContext contextWithOptions:nil];
     
-    CIFilter *monochrome = [CIFilter filterWithName:@"CIColorMonochrome"];
-    [monochrome setValue:beginImage forKey:kCIInputImageKey];
-    [monochrome setValue:[CIColor colorWithRed:1 green:1 blue:1 alpha:1] forKey:@"inputColor"];
-    [monochrome setValue:@(0) forKey:@"inputIntensity"];
-    
-    CIImage *outputImage = [monochrome outputImage];
+    CIImage *outputImage = beginImage;
     
     CGImageRef cgimg =
     [context createCGImage:outputImage fromRect:[outputImage extent]];
-    
-    UIImage *newImage = [UIImage imageWithCGImage:cgimg];
+
     currentImage = outputImage;
-    self.imageView.image = newImage;
+    self.imageView.image = [UIImage imageWithCGImage:cgimg];
     
     CGImageRelease(cgimg);
     
@@ -84,20 +62,21 @@ CAShapeLayer *rectLayer;
     
     widthscale = self.imageView.image.size.width/484;
     heightscale = self.imageView.image.size.height/648;
-    measurecounter = 1;
-    
-    labels = [[NSArray alloc]initWithObjects:@"Image #, ", @"Red, ", @"Green, ", @"Blue, ", @"Alpha\n", nil];
-    
-    redvalues = [[NSMutableArray alloc] init];
-    greenvalues = [[NSMutableArray alloc] init];
-    bluevalues = [[NSMutableArray alloc] init];
-    alphavalues = [[NSMutableArray alloc] init];
     
     rectLayer = [CAShapeLayer layer];
-    [rectLayer setBounds:CGRectMake(0.0f, 0.0f, [self.imageView bounds].size.width,
-                                    [self.imageView bounds].size.height)];
+    [rectLayer setBounds:CGRectMake(0.0f, 0.0f, [self.imageView bounds].size.width, [self.imageView bounds].size.height)];
     
     self.saveLabel.hidden = TRUE;
+    
+    newFileDialog = [[UIAlertView alloc]initWithTitle:@"Save As..." message:@"Default name is userdata" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    newFileDialog.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
+    fileCreated = FALSE;
+    
+    imagePicker = [[UIImagePickerController alloc] init];
+    
+    //Initialize Custom Tools
+    imageProcessor = [[ImageProcessing alloc]init];
     
 }
 
@@ -127,7 +106,7 @@ CAShapeLayer *rectLayer;
 {
     float slideValue = slider.value;
     
-    CIImage *outputImage = [self grayPhoto:currentImage withAmount:slideValue];
+    CIImage *outputImage = [imageProcessor grayPhoto:currentImage withAmount:slideValue];
     
     CGImageRef cgimg = [context createCGImage:outputImage
                                      fromRect:[outputImage extent]];
@@ -154,46 +133,33 @@ CAShapeLayer *rectLayer;
     else{
         [self presentViewController:pickerC animated:YES completion:nil];
     }
+    [self initializePointArray:points];
+    [self updateRect];
 }
 
 - (IBAction)savePhoto:(id)sender
 {
     
     self.saveLabel.hidden = FALSE;
-    
-    // 1
-    
-    CIImage *saveToSave = [self grayPhoto:currentImage withAmount:currentslidervalue];
-    
-    // 2
-    CIContext *softwareContext = [CIContext
-                                  contextWithOptions:@{kCIContextUseSoftwareRenderer : @(YES)} ];
-    // 3
-    CGImageRef cgImg = [softwareContext createCGImage:saveToSave
-                                             fromRect:[saveToSave extent]];
-    // 4
+    CIImage *saveToSave = [imageProcessor grayPhoto:currentImage withAmount:currentslidervalue];
+    CIContext *softwareContext = [CIContext contextWithOptions:@{kCIContextUseSoftwareRenderer : @(YES)}];
+    CGImageRef cgImg = [softwareContext createCGImage:saveToSave fromRect:[saveToSave extent]];
     ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
-    [library writeImageToSavedPhotosAlbum:cgImg
-                                 metadata:[saveToSave properties]
-                          completionBlock:^(NSURL *assetURL, NSError *error) {
-                              // 5
-                              CGImageRelease(cgImg);
-                          }];
+    [library writeImageToSavedPhotosAlbum:cgImg metadata:[saveToSave properties] completionBlock:^(NSURL *assetURL, NSError *error) {CGImageRelease(cgImg);}];
     
     self.saveLabel.text = [NSString stringWithFormat:@"Saved!"];
+
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [self dismissViewControllerAnimated:YES completion:nil];
     UIImage *gotImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     CIImage *theci = [CIImage imageWithCGImage:gotImage.CGImage];
     if (gotImage.imageOrientation == UIImageOrientationRight) {
         beginImage = [theci imageByApplyingTransform:CGAffineTransformMakeRotation(-M_PI/2)];
     } else {
         beginImage = theci;
-    }
+    } 
     currentImage = beginImage;
-    [filter setValue:beginImage forKey:kCIInputImageKey];
     [self amountSliderValueChanged:self.amountSlider];
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         [popoverController dismissPopoverAnimated:YES];
@@ -205,22 +171,11 @@ CAShapeLayer *rectLayer;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(CIImage *)grayPhoto:(CIImage *)img withAmount:(float)intensity
-{
-    
-    // 1
-    CIFilter *monochrome = [CIFilter filterWithName:@"CIColorMonochrome"];
-    [monochrome setValue:img forKey:kCIInputImageKey];
-    [monochrome setValue:[CIColor colorWithRed:1 green:1 blue:1 alpha:1] forKey:@"inputColor"];
-    [monochrome setValue:@(intensity) forKey:@"inputIntensity"];
-    
-    // 7
-    return monochrome.outputImage;
-}
-
 - (IBAction)takePicture:(id)sender
 {
-    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
+    
+    /*
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePicker.delegate = self;
@@ -229,53 +184,24 @@ CAShapeLayer *rectLayer;
     else{
         return;
     }
+*/
+    [self initializePointArray:points];
+    [self updateRect];
 }
 
 - (IBAction)getPixelInfo:(id)sender
 {
-    CFDataRef pixelData = CGDataProviderCopyData(CGImageGetDataProvider(self.imageView.image.CGImage));
-    const UInt8* data = CFDataGetBytePtr(pixelData);
-    
-    //int pixelInfo = ((self.imageView.image.size.width  * 50) + 50 ) * 4; // The image is png
-    
-    int red = 0;
-    int green = 0;
-    int blue = 0;
-    int alpha = 0;
-    
-    int pixelno = 0;
-    
-    for (int i=0; i<=(self.imageView.image.size.height*heightscale+self.imageView.image.size.width*widthscale); i=i+4) {
-        pixelno++;
-        red = red + data[i];
-        green = green + data[i+1];
-        blue = blue + data[i+2];
-        alpha = alpha + data[i+3];
+    if (fileCreated == FALSE) {
+        [newFileDialog show];
+        fileCreated = TRUE;
     }
-    
-    red = red/pixelno;
-    green = green/pixelno;
-    blue = blue/pixelno;
-    alpha = alpha/pixelno;
-    
-    NSString *labeltext = [NSString stringWithFormat:@"Image %d has averages: \nRed: %d\nBlue: %d\nGreen: %d\nAlpha: %d", measurecounter, red, green, blue, alpha];
-    
-    self.infoLabel.text = labeltext;
-    
-    [redvalues addObject:[NSNumber numberWithInt:red]];
-    [greenvalues addObject:[NSNumber numberWithInt:green]];
-    [bluevalues addObject:[NSNumber numberWithInt:blue]];
-    [alphavalues addObject:[NSNumber numberWithInt:alpha]];
-    
-    [self updatecsv];
-    
-    CFRelease(pixelData);
-    
-    measurecounter++;
+    self.infoLabel.text = [imageProcessor getPixelAverages:self.imageView];
 }
 
 - (IBAction)getThatArea:(id)sender
 {
+    widthscale = self.imageView.image.size.width/484;
+    heightscale = self.imageView.image.size.height/648;
     CGPoint topleft;
     NSValue *value1 = [points objectAtIndex:0];
     CGPoint point1 = value1.CGPointValue;
@@ -308,10 +234,7 @@ CAShapeLayer *rectLayer;
         [[self pointLabel]setText:thepoint];
     }
     
-    [rectLayer setPosition:CGPointMake(0, 0)];
-    
     [self updateRect];
-
 }
 
 - (IBAction)resetImage:(id)sender
@@ -323,6 +246,56 @@ CAShapeLayer *rectLayer;
     [self updateRect];
 }
 
+- (IBAction)newData:(id)sender {
+    [newFileDialog show];
+}
+
+- (IBAction)emailData:(id)sender {
+    NSString *emailTitle = @"Dosimetry Data";
+    NSString *messageBody = @"Your dosimetry data is attached!";
+    NSArray *toRecipents = [NSArray arrayWithObject:@"osumedphys@gmail.com"];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    if ([MFMailComposeViewController canSendMail]) {
+        mc.mailComposeDelegate = self;
+        [mc setSubject:emailTitle];
+        [mc setMessageBody:messageBody isHTML:NO];
+        [mc setToRecipients:toRecipents];
+        NSData* sendData = [[NSData alloc]initWithContentsOfFile:imageProcessor.getDataPath];
+        [mc addAttachmentData:sendData mimeType:@"text/csv" fileName:[NSString stringWithFormat:@"%@.csv", imageProcessor.getFileName]];
+        [self presentViewController:mc animated:YES completion:NULL];
+    }
+    else return;
+}
+
+- (IBAction)closeFile:(id)sender {
+    [imageProcessor closeFile];
+    self.infoLabel.text = @"File Closed!";
+    fileCreated = FALSE;
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == alertView.cancelButtonIndex || [[newFileDialog textFieldAtIndex:0].text length] <= 0) {
+        return;
+    }
+    else{
+        [imageProcessor makeCSV:[newFileDialog textFieldAtIndex:0].text];
+    }
+}
+
 - (void)updateimage
 {
     CGImageRef cgimg =
@@ -331,35 +304,6 @@ CAShapeLayer *rectLayer;
     self.imageView.image =[UIImage imageWithCGImage:cgimg];
     
     CGImageRelease(cgimg);
-}
-
-- (void)updatecsv
-{
-    NSMutableArray *csvArray = [[NSMutableArray alloc]init];
-    NSUInteger count = [redvalues count];
-    [csvArray addObjectsFromArray:labels];
-    for (NSUInteger i=0; i<count; i++ ) {
-        [csvArray addObject:[NSString stringWithFormat: @"%d", i+1]];
-        [csvArray addObject:@","];
-        [csvArray addObject:[[redvalues objectAtIndex:i] stringValue]];
-        [csvArray addObject:@","];
-        [csvArray addObject:[[greenvalues objectAtIndex:i] stringValue]];
-        [csvArray addObject:@","];
-        [csvArray addObject:[[bluevalues objectAtIndex:i] stringValue]];
-        [csvArray addObject:@","];
-        [csvArray addObject:[[alphavalues objectAtIndex:i] stringValue]];
-        [csvArray addObject:@"\n"];
-    }
-    
-    NSString *csv = [csvArray componentsJoinedByString:@""];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    
-    NSString *fullPath = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.csv", @"userdata"]];
-    [fileManager createFileAtPath:fullPath contents:[csv dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
 }
 
 - (void)updateRect

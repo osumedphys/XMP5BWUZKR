@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <QuartzCore/QuartzCore.h>
+#import <MessageUI/MessageUI.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface ViewController : UIViewController <UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ViewController : UIViewController <UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 - (IBAction)amountSliderValueChanged:(id)sender;
 @property (weak, nonatomic) IBOutlet UISlider *amountSlider;
@@ -23,8 +27,14 @@
 - (IBAction)resetImage:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *saveLabel;
+- (IBAction)newData:(id)sender;
+- (IBAction)emailData:(id)sender;
+- (IBAction)closeFile:(id)sender;
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 - (void)updateimage;
-- (void)updatecsv;
 - (void)updateRect;
+
+
 
 @end
