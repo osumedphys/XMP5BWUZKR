@@ -15,10 +15,9 @@
 		91632B13171DAF9C008A8793 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91632B12171DAF9C008A8793 /* AssetsLibrary.framework */; };
 		91632B15171DB25C008A8793 /* IMG_0005.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91632B14171DB25C008A8793 /* IMG_0005.jpg */; };
 		91632B17172044E0008A8793 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91632B16172044E0008A8793 /* QuartzCore.framework */; };
-		91632B4F173AC2DD008A8793 /* ImageProcessing.m in Sources */ = {isa = PBXBuildFile; fileRef = 91632B4E173AC2DD008A8793 /* ImageProcessing.m */; };
+		91632B4F173AC2DD008A8793 /* ImageProcessing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91632B4E173AC2DD008A8793 /* ImageProcessing.mm */; };
 		91632B51173AD68F008A8793 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91632B50173AD68F008A8793 /* MessageUI.framework */; };
 		91AC218817414F340091C0D7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC218717414F340091C0D7 /* AVFoundation.framework */; };
-		91AC21A91743E9FD0091C0D7 /* CameraIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 91AC21A81743E9FD0091C0D7 /* CameraIcon.png */; };
 		91AC21BC174527620091C0D7 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC21BB174527620091C0D7 /* MediaPlayer.framework */; };
 		91AC21BE174527760091C0D7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC21BD174527760091C0D7 /* CoreMedia.framework */; };
 		91AC21C01745277E0091C0D7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC21BF1745277E0091C0D7 /* CoreVideo.framework */; };
@@ -36,6 +35,8 @@
 		91D1598D171DABBA003313E0 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91D1598B171DABBA003313E0 /* MainStoryboard_iPad.storyboard */; };
 		91D15990171DABBA003313E0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91D1598F171DABBA003313E0 /* ViewController.m */; };
 		91D1599F171DADE7003313E0 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D1599E171DADE7003313E0 /* CoreImage.framework */; };
+		91EDCD35175E4D7A002D00F6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91EDCD34175E4D7A002D00F6 /* Accelerate.framework */; };
+		91EDCD38175E531A002D00F6 /* CurveFit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91EDCD37175E531A002D00F6 /* CurveFit.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,10 +53,9 @@
 		91632B14171DB25C008A8793 /* IMG_0005.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_0005.jpg; sourceTree = "<group>"; };
 		91632B16172044E0008A8793 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		91632B4D173AC2DD008A8793 /* ImageProcessing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessing.h; sourceTree = "<group>"; };
-		91632B4E173AC2DD008A8793 /* ImageProcessing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageProcessing.m; sourceTree = "<group>"; };
+		91632B4E173AC2DD008A8793 /* ImageProcessing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageProcessing.mm; sourceTree = "<group>"; };
 		91632B50173AD68F008A8793 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		91AC218717414F340091C0D7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		91AC21A81743E9FD0091C0D7 /* CameraIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CameraIcon.png; sourceTree = "<group>"; };
 		91AC21AA1743ED5D0091C0D7 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		91AC21AC1743EF480091C0D7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		91AC21BB174527620091C0D7 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -80,6 +80,9 @@
 		91D1598E171DABBA003313E0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		91D1598F171DABBA003313E0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		91D1599E171DADE7003313E0 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		91EDCD34175E4D7A002D00F6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		91EDCD36175E530B002D00F6 /* CurveFit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveFit.h; sourceTree = "<group>"; };
+		91EDCD37175E531A002D00F6 /* CurveFit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CurveFit.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91EDCD35175E4D7A002D00F6 /* Accelerate.framework in Frameworks */,
 				91AC21C2174527900091C0D7 /* MobileCoreServices.framework in Frameworks */,
 				91AC21C01745277E0091C0D7 /* CoreVideo.framework in Frameworks */,
 				91AC21BE174527760091C0D7 /* CoreMedia.framework in Frameworks */,
@@ -115,7 +119,9 @@
 				9129850017454E180040F875 /* ExpandyButton.h */,
 				9129850117454E180040F875 /* ExpandyButton.m */,
 				91632B4D173AC2DD008A8793 /* ImageProcessing.h */,
-				91632B4E173AC2DD008A8793 /* ImageProcessing.m */,
+				91632B4E173AC2DD008A8793 /* ImageProcessing.mm */,
+				91EDCD36175E530B002D00F6 /* CurveFit.h */,
+				91EDCD37175E531A002D00F6 /* CurveFit.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -135,8 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				91632B14171DB25C008A8793 /* IMG_0005.jpg */,
-				91AC21A81743E9FD0091C0D7 /* CameraIcon.png */,
-				91D1599E171DADE7003313E0 /* CoreImage.framework */,
 				91D15976171DABBA003313E0 /* XMP5BWUZKR */,
 				91D1596F171DABBA003313E0 /* Frameworks */,
 				91D1596E171DABBA003313E0 /* Products */,
@@ -154,6 +158,8 @@
 		91D1596F171DABBA003313E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				91EDCD34175E4D7A002D00F6 /* Accelerate.framework */,
+				91D1599E171DADE7003313E0 /* CoreImage.framework */,
 				91D15970171DABBA003313E0 /* UIKit.framework */,
 				91D15972171DABBA003313E0 /* Foundation.framework */,
 				91D15974171DABBA003313E0 /* CoreGraphics.framework */,
@@ -258,7 +264,6 @@
 				91D1598A171DABBA003313E0 /* MainStoryboard_iPhone.storyboard in Resources */,
 				91D1598D171DABBA003313E0 /* MainStoryboard_iPad.storyboard in Resources */,
 				91632B15171DB25C008A8793 /* IMG_0005.jpg in Resources */,
-				91AC21A91743E9FD0091C0D7 /* CameraIcon.png in Resources */,
 				9129850817454E380040F875 /* AVCamDemoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,7 +282,8 @@
 				91D1597D171DABBA003313E0 /* main.m in Sources */,
 				91D15981171DABBA003313E0 /* AppDelegate.m in Sources */,
 				91D15990171DABBA003313E0 /* ViewController.m in Sources */,
-				91632B4F173AC2DD008A8793 /* ImageProcessing.m in Sources */,
+				91632B4F173AC2DD008A8793 /* ImageProcessing.mm in Sources */,
+				91EDCD38175E531A002D00F6 /* CurveFit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,8 @@ CAShapeLayer *rectLayer;
 UIAlertView* newFileDialog;
 UIImagePickerController* imagePicker;
 
+double currentDose;
+
 bool fileCreated;
 
 //Declare Custom Tools
@@ -74,6 +76,8 @@ ImageProcessing* imageProcessor;
     fileCreated = FALSE;
     
     imagePicker = [[UIImagePickerController alloc] init];
+    
+    currentDose = 0;
     
     //Initialize Custom Tools
     imageProcessor = [[ImageProcessing alloc]init];
@@ -148,7 +152,11 @@ ImageProcessing* imageProcessor;
     [library writeImageToSavedPhotosAlbum:cgImg metadata:[saveToSave properties] completionBlock:^(NSURL *assetURL, NSError *error) {CGImageRelease(cgImg);}];
     
     self.saveLabel.text = [NSString stringWithFormat:@"Saved!"];
+    [self performSelector:@selector(hideLabel:) withObject:self.saveLabel afterDelay:2];
+}
 
+- (void)hideLabel:(UILabel *)label {
+	[label setHidden:YES];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -195,7 +203,7 @@ ImageProcessing* imageProcessor;
         [newFileDialog show];
         fileCreated = TRUE;
     }
-    self.infoLabel.text = [imageProcessor getPixelAverages:self.imageView];
+    self.infoLabel.text = [imageProcessor getPixelAverages:self.imageView.image];
 }
 
 - (IBAction)getThatArea:(id)sender
@@ -331,6 +339,15 @@ ImageProcessing* imageProcessor;
     [rectLayer setFillColor:nil];
     
     [[self.imageView layer] addSublayer:rectLayer];
+}
+
+- (IBAction)setCalibration:(id)sender {
+    [imageProcessor calibrate:self.imageView.image];
+}
+
+- (IBAction)getDose:(id)sender {
+    currentDose = [imageProcessor getDose:self.imageView.image];
+    self.doseLabel.text = [NSString stringWithFormat:@"Dose: %f", currentDose];
 }
 
 @end

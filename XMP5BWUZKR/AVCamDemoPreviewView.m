@@ -79,7 +79,7 @@
     id delegate = [self delegate];
     if ([delegate respondsToSelector:@selector(tapToFocus:)]) {
         [delegate tapToFocus:[tapPointValue CGPointValue]];
-    }    
+    }
 }
 
 - (void)handleDoubleTap:(id)tapPointValue

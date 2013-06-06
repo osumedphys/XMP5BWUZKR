@@ -73,7 +73,7 @@
     AVCaptureAudioDataOutput *_audioDataOutput;
     id _deviceConnectedObserver;
     id _deviceDisconnectedObserver;
-    UIBackgroundTaskIdentifier _backgroundRecordingID;    
+    UIBackgroundTaskIdentifier _backgroundRecordingID;
 }
 
 @property (nonatomic,readonly,retain) AVCaptureSession *session;
@@ -85,6 +85,7 @@
 @property (nonatomic,assign) AVCaptureWhiteBalanceMode whiteBalanceMode;
 @property (nonatomic,readonly,getter=isRecording) BOOL recording;
 @property (nonatomic,assign) id <AVCamDemoCaptureManagerDelegate> delegate;
+@property (nonatomic,retain) UIImage *lastCapped;
 
 - (BOOL) setupSessionWithPreset:(NSString *)sessionPreset error:(NSError **)error;
 - (NSUInteger) cameraCount;
@@ -103,5 +104,7 @@
 - (void) exposureAtPoint:(CGPoint)point;
 - (void) setConnectionWithMediaType:(NSString *)mediaType enabled:(BOOL)enabled;
 + (AVCaptureConnection *)connectionWithMediaType:(NSString *)mediaType fromConnections:(NSArray *)connections;
+
+- (UIImage*) getLastCapped;
 
 @end

@@ -34,6 +34,9 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 - (void)updateimage;
 - (void)updateRect;
+- (IBAction)setCalibration:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *doseLabel;
+- (IBAction)getDose:(id)sender;
 
 
 

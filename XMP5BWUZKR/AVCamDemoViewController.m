@@ -98,6 +98,7 @@ const CGFloat hudBorderWidth = 1.f;
 @synthesize recordButton = _recordButton;
 @synthesize stillImageButton = _stillImageButton;
 @synthesize gravityButton = _gravityButton;
+@synthesize calibrationLabel = _calibrationLabel;
 @synthesize flash = _flash;
 @synthesize torch = _torch;
 @synthesize focus = _focus;
@@ -294,6 +295,8 @@ const CGFloat hudBorderWidth = 1.f;
     }
     
     [captureManager release];
+    
+    _calibrationLabel.hidden = YES;
     
     [super viewDidLoad];
 }
@@ -598,6 +601,22 @@ const CGFloat hudBorderWidth = 1.f;
 
 - (IBAction)doneTakingPics:(id)sender {
     [self dismissViewControllerAnimated:TRUE completion:nil];
+}
+
+- (IBAction)calibratePressed:(id)sender {
+    _calibrationLabel.hidden = NO;
+    [self.captureManager.videoInput.device lockForConfiguration:nil];
+    [self.captureManager.videoInput.device setFocusMode:AVCaptureFocusModeLocked];
+    [self.captureManager.videoInput.device setExposureMode:AVCaptureExposureModeLocked];
+    [self.captureManager.videoInput.device setWhiteBalanceMode:AVCaptureWhiteBalanceModeLocked];
+    [self.captureManager.videoInput.device unlockForConfiguration];
+    [self.captureManager captureStillImage];
+    //UIImage* calibrator = [self.captureManager getLastCapped];
+    [self performSelector:@selector(hideLabel:) withObject:_calibrationLabel afterDelay:2];
+}
+
+- (void)hideLabel:(UILabel *)label {
+	[label setHidden:YES];
 }
 
 @end
@@ -934,7 +953,7 @@ const CGFloat hudBorderWidth = 1.f;
     [self drawFocusBoxAtPointOfInterest:screenCenter];
     [self drawExposeBoxAtPointOfInterest:screenCenter];
     
-    [[self captureManager] setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
+    //[[self captureManager] setFocusMode:AVCaptureFocusModeContinuousAutoFocus];
 }
 
 @end

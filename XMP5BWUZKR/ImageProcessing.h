@@ -28,11 +28,15 @@
 
 //grayPhoto: CIImage -> CIImage
 //Grayscales a given photo with an intensity between 0 and 1
--(CIImage *)grayPhoto:(CIImage *)img withAmount:(float)intensity;
+-(CIImage*)grayPhoto:(CIImage *)img withAmount:(float)intensity;
 
-//getPixelAverages: UIImageView* -> NSString*
-//Takes the image currently displayed, calculates RGBA averages, and returns a string with the information
-- (NSString*)getPixelAverages:(UIImageView*)mainImage;
+//getPixelAverages: CIImage* -> NSString*
+//Takes the current image from the view controller, calculates RGBA averages, and returns a string with the information
+- (NSString*)getPixelAverages:(UIImage*)mainImage;
+
+- (void)calibrate:(UIImage*)input;
+
+- (double)getDose:(UIImage*)input;
 
 //makeCSV: NSString* -> void
 //Initializes the CSV with the given filename

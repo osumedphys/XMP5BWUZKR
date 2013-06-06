@@ -117,7 +117,7 @@ const CGFloat borderWidth = 1.f;
             [label setFont:[UIFont systemFontOfSize:fontSize]];
             [label setTextColor:[UIColor blackColor]];
             [label setBackgroundColor:[UIColor clearColor]];
-            [label setTextAlignment:UITextAlignmentCenter];
+            label.textAlignment = NSTextAlignmentCenter;
             [self addSubview:label];
             [labels addObject:label];
             [label release];

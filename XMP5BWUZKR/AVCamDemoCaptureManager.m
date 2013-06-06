@@ -99,6 +99,7 @@
 @synthesize backgroundRecordingID = _backgroundRecordingID;
 @synthesize deviceConnectedObserver = _deviceConnectedObserver;
 @synthesize deviceDisconnectedObserver = _deviceDisconnectedObserver;
+@synthesize lastCapped;
 
 - (id) init
 {
@@ -273,7 +274,8 @@
                                                          completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                                                              if (imageDataSampleBuffer != NULL) {
                                                                  NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-                                                                 UIImage *image = [[UIImage alloc] initWithData:imageData];                                                                 
+                                                                 UIImage *image = [[UIImage alloc] initWithData:imageData];
+                                                                 lastCapped = image;
                                                                  ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
                                                                  [library writeImageToSavedPhotosAlbum:[image CGImage]
                                                                                            orientation:(ALAssetOrientation)[image imageOrientation]
@@ -501,8 +503,9 @@ bail:
     if ([device isFocusPointOfInterestSupported] && [device isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
         NSError *error;
         if ([device lockForConfiguration:&error]) {
-            [device setFocusPointOfInterest:point];
             [device setFocusMode:AVCaptureFocusModeAutoFocus];
+            [device setFocusPointOfInterest:point];
+            [device setFocusMode:AVCaptureFocusModeLocked];
             [device unlockForConfiguration];
         } else {
             id delegate = [self delegate];
@@ -519,8 +522,9 @@ bail:
     if ([device isExposurePointOfInterestSupported] && [device isExposureModeSupported:AVCaptureExposureModeContinuousAutoExposure]) {
         NSError *error;
         if ([device lockForConfiguration:&error]) {
-            [device setExposurePointOfInterest:point];
             [device setExposureMode:AVCaptureExposureModeContinuousAutoExposure];
+            [device setExposurePointOfInterest:point];
+            [device setExposureMode:AVCaptureExposureModeLocked];
             [device unlockForConfiguration];
         } else {
             id delegate = [self delegate];
@@ -546,6 +550,11 @@ bail:
 		}
 	}
 	return nil;
+}
+
+- (UIImage*)getLastCapped
+{
+    return self.lastCapped;
 }
 
 @end

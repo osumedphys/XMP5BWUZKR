@@ -61,6 +61,7 @@
     UIBarButtonItem *_recordButton;
     UIBarButtonItem *_stillImageButton;
     UIBarButtonItem *_gravityButton;
+    UILabel *_calibrationLabel;
     ExpandyButton *_flash;
     ExpandyButton *_torch;
     ExpandyButton *_focus;
@@ -85,15 +86,20 @@
 @property (nonatomic,retain) IBOutlet UIBarButtonItem *recordButton;
 @property (nonatomic,retain) IBOutlet UIBarButtonItem *stillImageButton;
 @property (nonatomic,retain) IBOutlet UIBarButtonItem *gravityButton;
+@property (nonatomic,retain) IBOutlet UILabel *calibrationLabel;
 @property (nonatomic,retain) ExpandyButton *flash;
 @property (nonatomic,retain) ExpandyButton *torch;
 @property (nonatomic,retain) ExpandyButton *focus;
 @property (nonatomic,retain) ExpandyButton *exposure;
 @property (nonatomic,retain) ExpandyButton *whiteBalance;
 
+
 @property (nonatomic,retain) IBOutlet UIView *adjustingFocus;
 @property (nonatomic,retain) IBOutlet UIView *adjustingExposure;
 @property (nonatomic,retain) IBOutlet UIView *adjustingWhiteBalance;
+
+
+
 
 - (IBAction)record:(id)sender;
 - (IBAction)still:(id)sender;
@@ -113,6 +119,9 @@
 - (IBAction)changeGravity;
 
 - (IBAction)doneTakingPics:(id)sender;
+
+- (IBAction)calibratePressed:(id)sender;
+
 
 @end
 
