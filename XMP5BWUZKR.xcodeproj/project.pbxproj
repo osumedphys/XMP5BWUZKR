@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9110833417737B8F009B7E26 /* CalibrationPointsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9110833217737B8F009B7E26 /* CalibrationPointsController.m */; };
+		9110833517737B8F009B7E26 /* CalibrationPointsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9110833317737B8F009B7E26 /* CalibrationPointsController.xib */; };
 		9129850817454E380040F875 /* AVCamDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9129850617454E380040F875 /* AVCamDemoViewController.xib */; };
 		9129850A17454F600040F875 /* AVCamDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 912984FF17454E080040F875 /* AVCamDemoViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9129850B17454F670040F875 /* AVCamDemoCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9129850317454E230040F875 /* AVCamDemoCaptureManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -17,6 +19,8 @@
 		91632B17172044E0008A8793 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91632B16172044E0008A8793 /* QuartzCore.framework */; };
 		91632B4F173AC2DD008A8793 /* ImageProcessing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91632B4E173AC2DD008A8793 /* ImageProcessing.mm */; };
 		91632B51173AD68F008A8793 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91632B50173AD68F008A8793 /* MessageUI.framework */; };
+		917610C917695EED0049570F /* CalibrationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917610C817695EED0049570F /* CalibrationController.m */; };
+		917610D6176A0EB80049570F /* SharedData.mm in Sources */ = {isa = PBXBuildFile; fileRef = 917610D5176A0EB80049570F /* SharedData.mm */; };
 		91AC218817414F340091C0D7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC218717414F340091C0D7 /* AVFoundation.framework */; };
 		91AC21BC174527620091C0D7 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC21BB174527620091C0D7 /* MediaPlayer.framework */; };
 		91AC21BE174527760091C0D7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC21BD174527760091C0D7 /* CoreMedia.framework */; };
@@ -40,6 +44,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9110833117737B8F009B7E26 /* CalibrationPointsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalibrationPointsController.h; sourceTree = "<group>"; };
+		9110833217737B8F009B7E26 /* CalibrationPointsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalibrationPointsController.m; sourceTree = "<group>"; };
+		9110833317737B8F009B7E26 /* CalibrationPointsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalibrationPointsController.xib; sourceTree = "<group>"; };
 		912984FE17454E080040F875 /* AVCamDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVCamDemoViewController.h; sourceTree = "<group>"; };
 		912984FF17454E080040F875 /* AVCamDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVCamDemoViewController.m; sourceTree = "<group>"; };
 		9129850017454E180040F875 /* ExpandyButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpandyButton.h; sourceTree = "<group>"; };
@@ -55,6 +62,10 @@
 		91632B4D173AC2DD008A8793 /* ImageProcessing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessing.h; sourceTree = "<group>"; };
 		91632B4E173AC2DD008A8793 /* ImageProcessing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageProcessing.mm; sourceTree = "<group>"; };
 		91632B50173AD68F008A8793 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		917610C717695EED0049570F /* CalibrationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalibrationController.h; sourceTree = "<group>"; };
+		917610C817695EED0049570F /* CalibrationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalibrationController.m; sourceTree = "<group>"; };
+		917610D4176A0EB80049570F /* SharedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedData.h; sourceTree = "<group>"; };
+		917610D5176A0EB80049570F /* SharedData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SharedData.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		91AC218717414F340091C0D7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		91AC21AA1743ED5D0091C0D7 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		91AC21AC1743EF480091C0D7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -116,12 +127,14 @@
 				9129850317454E230040F875 /* AVCamDemoCaptureManager.m */,
 				9129850417454E230040F875 /* AVCamDemoPreviewView.h */,
 				9129850517454E230040F875 /* AVCamDemoPreviewView.m */,
+				91EDCD36175E530B002D00F6 /* CurveFit.h */,
+				91EDCD37175E531A002D00F6 /* CurveFit.cpp */,
 				9129850017454E180040F875 /* ExpandyButton.h */,
 				9129850117454E180040F875 /* ExpandyButton.m */,
 				91632B4D173AC2DD008A8793 /* ImageProcessing.h */,
 				91632B4E173AC2DD008A8793 /* ImageProcessing.mm */,
-				91EDCD36175E530B002D00F6 /* CurveFit.h */,
-				91EDCD37175E531A002D00F6 /* CurveFit.cpp */,
+				917610D4176A0EB80049570F /* SharedData.h */,
+				917610D5176A0EB80049570F /* SharedData.mm */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -131,8 +144,16 @@
 			children = (
 				912984FE17454E080040F875 /* AVCamDemoViewController.h */,
 				912984FF17454E080040F875 /* AVCamDemoViewController.m */,
+				9129850617454E380040F875 /* AVCamDemoViewController.xib */,
+				917610C717695EED0049570F /* CalibrationController.h */,
+				917610C817695EED0049570F /* CalibrationController.m */,
 				91D1598E171DABBA003313E0 /* ViewController.h */,
 				91D1598F171DABBA003313E0 /* ViewController.m */,
+				91D15988171DABBA003313E0 /* MainStoryboard_iPhone.storyboard */,
+				91D1598B171DABBA003313E0 /* MainStoryboard_iPad.storyboard */,
+				9110833117737B8F009B7E26 /* CalibrationPointsController.h */,
+				9110833217737B8F009B7E26 /* CalibrationPointsController.m */,
+				9110833317737B8F009B7E26 /* CalibrationPointsController.xib */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -182,11 +203,6 @@
 			children = (
 				91AC21B7174524230091C0D7 /* View Controllers */,
 				91AC21B6174523E70091C0D7 /* Classes */,
-				91D1597F171DABBA003313E0 /* AppDelegate.h */,
-				91D15980171DABBA003313E0 /* AppDelegate.m */,
-				91D15988171DABBA003313E0 /* MainStoryboard_iPhone.storyboard */,
-				91D1598B171DABBA003313E0 /* MainStoryboard_iPad.storyboard */,
-				9129850617454E380040F875 /* AVCamDemoViewController.xib */,
 				91D15977171DABBA003313E0 /* Supporting Files */,
 			);
 			path = XMP5BWUZKR;
@@ -195,6 +211,8 @@
 		91D15977171DABBA003313E0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				91D1597F171DABBA003313E0 /* AppDelegate.h */,
+				91D15980171DABBA003313E0 /* AppDelegate.m */,
 				91D15978171DABBA003313E0 /* XMP5BWUZKR-Info.plist */,
 				91D15979171DABBA003313E0 /* InfoPlist.strings */,
 				91D1597C171DABBA003313E0 /* main.m */,
@@ -265,6 +283,7 @@
 				91D1598D171DABBA003313E0 /* MainStoryboard_iPad.storyboard in Resources */,
 				91632B15171DB25C008A8793 /* IMG_0005.jpg in Resources */,
 				9129850817454E380040F875 /* AVCamDemoViewController.xib in Resources */,
+				9110833517737B8F009B7E26 /* CalibrationPointsController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +303,9 @@
 				91D15990171DABBA003313E0 /* ViewController.m in Sources */,
 				91632B4F173AC2DD008A8793 /* ImageProcessing.mm in Sources */,
 				91EDCD38175E531A002D00F6 /* CurveFit.cpp in Sources */,
+				917610C917695EED0049570F /* CalibrationController.m in Sources */,
+				917610D6176A0EB80049570F /* SharedData.mm in Sources */,
+				9110833417737B8F009B7E26 /* CalibrationPointsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

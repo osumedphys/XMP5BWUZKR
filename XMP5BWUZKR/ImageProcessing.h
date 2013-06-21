@@ -32,9 +32,15 @@
 
 //getPixelAverages: CIImage* -> NSString*
 //Takes the current image from the view controller, calculates RGBA averages, and returns a string with the information
-- (NSString*)getPixelAverages:(UIImage*)mainImage;
+//- (NSString*)getPixelAverages:(UIImage*)mainImage;
 
-- (void)calibrate:(UIImage*)input;
+- (NSArray*)getPixelAverages:(UIImage*)mainImage;
+
+- (void)prepForCalibration;
+
+- (int)newcalibrate:(UIImage*)input withDose:(double)d;
+
+- (void)getNewCoefficients;
 
 - (double)getDose:(UIImage*)input;
 

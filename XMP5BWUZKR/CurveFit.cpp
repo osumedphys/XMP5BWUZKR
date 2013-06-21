@@ -36,6 +36,12 @@ CurveFit::CurveFit(){
     fitCurve(3); */
 }
 
+CurveFit::CurveFit(int numpoints){
+    this->numberofpoints = numpoints;
+    xvalues = new double[numpoints];
+    yvalues = new double[numpoints];
+}
+
 CurveFit::CurveFit(double* xs, double* ys, int numpoints){
     this->xvalues = xs;
     this->yvalues = ys;

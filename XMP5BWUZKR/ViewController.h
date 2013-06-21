@@ -21,11 +21,10 @@
 - (IBAction)savePhoto:(id)sender;
 @property (strong, nonatomic) UIPopoverController *popoverController;
 - (IBAction)takePicture:(id)sender;
-- (IBAction)getPixelInfo:(id)sender;
+//- (IBAction)getPixelInfo:(id)sender;
 - (IBAction)getThatArea:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *pointLabel;
 - (IBAction)resetImage:(id)sender;
-@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *saveLabel;
 - (IBAction)newData:(id)sender;
 - (IBAction)emailData:(id)sender;
@@ -35,9 +34,14 @@
 - (void)updateimage;
 - (void)updateRect;
 - (IBAction)setCalibration:(id)sender;
+- (IBAction)configureCalibration:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *calibrationButton;
+@property (weak, nonatomic) IBOutlet UILabel *calibrationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *doseLabel;
 - (IBAction)getDose:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UITextField *calibrationDoseBox;
+- (IBAction)newCurve:(id)sender;
 
 
 @end

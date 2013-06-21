@@ -20,6 +20,7 @@ private:
     
 public:
     CurveFit();
+    CurveFit(int numpoints);
     CurveFit(double* xs, double* ys, int numpoints);
         
     double* getxvalues();

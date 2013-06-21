@@ -8,16 +8,12 @@
 
 #import "ImageProcessing.h"
 #import "CurveFit.h"
+#import "SharedData.h"
 #include "math.h"
 #include <iostream>
 using namespace std;
 
 @implementation ImageProcessing
-
-CIContext *context;
-CIImage *beginImage;
-CIImage *currentImage;
-
 NSArray *labels;
 
 NSMutableArray *redvalues;
@@ -38,26 +34,26 @@ float widthscale;
 float heightscale; 
 int imageNumber;
 
-int howmanypoints = 5;
-int donepoints = 0;
-int order = 5;
+int howmanypoints;
+int donepoints;
+int order;
 
-CurveFit* myfit = new CurveFit();
-double* redxs = new double[howmanypoints];
-double* doseys = new double[howmanypoints];
-double* coeffs = new double[order+1];
+double* redxs;
+double* doseys;
+double* coeffs;
+
+CurveFit* myfit;
 
 - (id)init{
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_0005" ofType:@"jpg"];
-    NSURL *fileNameAndPath = [NSURL fileURLWithPath:filePath];
+    self = [super init];
     
-    beginImage = [CIImage imageWithContentsOfURL:fileNameAndPath];
+    howmanypoints = 0;
+    donepoints = 0;
+    order = 0;
     
-    context = [CIContext contextWithOptions:nil];
-    
-    CIImage *outputImage = beginImage;
-    
-    currentImage = outputImage;
+    redxs = 0;
+    doseys = 0;
+    coeffs = 0;
     
     labels = [[NSArray alloc]initWithObjects:@"Image #, ", @"Red, ", @"Green, ", @"Blue, ", @"Alpha\n", nil];
     
@@ -66,7 +62,7 @@ double* coeffs = new double[order+1];
     bluevalues = [[NSMutableArray alloc] init];
     alphavalues = [[NSMutableArray alloc] init];
     
-    imageNumber = 1;
+    imageNumber = 0;
     dataPath = [[NSString alloc]init];
     fileName = @"userdata";
     monochrome = [CIFilter filterWithName:@"CIColorMonochrome"];
@@ -85,9 +81,16 @@ double* coeffs = new double[order+1];
     }
     */
     
-    for(int i=1; i<=howmanypoints; i++){
-        doseys[i-1] = 50*i;
+    double* testDoses = new double[8];
+    
+    for(int i=1; i<=6; i++){
+        testDoses[i-1] = 50*i;
     }
+    
+    testDoses[6] = 400;
+    testDoses[7] = 500;
+    
+    doseys = testDoses;
     
     return self;
 }
@@ -109,7 +112,7 @@ double* coeffs = new double[order+1];
 }
 
 -(void)closeFile{
-    imageNumber = 1;
+    imageNumber = 0;
     dataPath = [[NSString alloc]init];
     fileName = @"userdata";
 }
@@ -121,9 +124,10 @@ double* coeffs = new double[order+1];
     return monochrome.outputImage;
 }
 
-- (NSString*)getPixelAverages:(UIImage*)mainImage{
+- (NSArray*)getPixelAverages:(UIImage*)mainImage{
+    NSArray* imageValues;
     int numberofpixels = mainImage.size.width * mainImage.size.height;
-
+    
     CFDataRef pixelData = CGDataProviderCopyData(CGImageGetDataProvider(mainImage.CGImage));
     const UInt8* data = CFDataGetBytePtr(pixelData);
     
@@ -144,57 +148,59 @@ double* coeffs = new double[order+1];
     blue = blue/numberofpixels;
     alpha = alpha/numberofpixels;
     
-    [redvalues addObject:[NSNumber numberWithDouble:red]];
-    [greenvalues addObject:[NSNumber numberWithDouble:green]];
-    [bluevalues addObject:[NSNumber numberWithDouble:blue]];
-    [alphavalues addObject:[NSNumber numberWithDouble:alpha]];
+    //[self updateCSV];
     
-    [self updateCSV];
+    imageValues = [[NSArray alloc]initWithObjects:[NSNumber numberWithDouble:red], [NSNumber numberWithDouble:green], [NSNumber numberWithDouble:blue], [NSNumber numberWithDouble:alpha], nil];
     
     CFRelease(pixelData);
-    
-    NSString *labeltext = [NSString stringWithFormat:@"Image %d has averages: \nRed: %f\nGreen: %f\nBlue: %f\nAlpha: %f", imageNumber, red, green, blue, alpha];
-    
-    imageNumber++;
-    return labeltext;
+    return imageValues;
     
 }
 
-- (void)calibrate:(UIImage*)input{
-    [self getPixelAverages:input];
-    int thisImageNumber = imageNumber-2;
-    averageRed = [[redvalues objectAtIndex:thisImageNumber] doubleValue];
-    NSLog(@"Image %d has averages: \nRed: %f", imageNumber, averageRed);
-    redxs[donepoints] = averageRed;
-    //averageGreen = [[greenvalues objectAtIndex:thisImageNumber] doubleValue];
-    //averageBlue = [[bluevalues objectAtIndex:thisImageNumber] doubleValue];
-    donepoints++;
-    
-    if (donepoints == howmanypoints) {
-        myfit->setnumberofpoints(howmanypoints);
-        cout << "X VALUES" << endl;
-        myfit->setxvalues(redxs);
-        for(int i=0; i<howmanypoints; i++){
-            cout << i << ": " << myfit->getxvalues()[i] << endl;
-        }
-        myfit->setyvalues(doseys);
-        cout << "Y VALUES" << endl;
-        for(int i=0; i<howmanypoints; i++){
-            cout << i << ": " << myfit->getyvalues()[i] << endl;
-        }
-        myfit->fitCurve(order);
-        coeffs = myfit->getcoefficients();
+- (void)prepForCalibration{
+    howmanypoints = [[SharedData sharedData]getNumberOfPoints];
+    order = [[SharedData sharedData]getCurveOrder];
+    myfit = new CurveFit(howmanypoints);
+    imageNumber = 0;
+}
+
+- (int)newcalibrate:(UIImage*)input withDose:(double)d{
+    NSArray* averages = [self getPixelAverages:input];
+    double currentRed = [averages[0] doubleValue];
+    //[[SharedData sharedData]getPoints][imageNumber] = [NSValue valueWithCGPoint:CGPointMake(currentRed, d)];
+    [[SharedData sharedData]getxvalues][imageNumber] = currentRed;
+    [[SharedData sharedData]getyvalues][imageNumber] = d;
+    int displayedImageNumber = ++imageNumber;
+    return displayedImageNumber;
+}
+
+- (void)getNewCoefficients{
+    myfit->setxvalues([[SharedData sharedData]getxvalues]);
+    myfit->setyvalues([[SharedData sharedData]getyvalues]);
+    cout << "X VALUES" << endl;
+    for(int i=0; i<howmanypoints; i++){
+        cout << i << ": " << myfit->getxvalues()[i] << endl;
     }
+    cout << "Y VALUES" << endl;
+    for(int i=0; i<howmanypoints; i++){
+        cout << i << ": " << myfit->getyvalues()[i] << endl;
+    }
+    myfit->fitCurve(order);
+    coeffs = myfit->getcoefficients();
 }
 
 - (double)getDose:(UIImage *)input{
     double dose = 0;
     [self getPixelAverages:input];
-    int thisImageNumber = imageNumber-2;
     //double netred = averageRed - [[redvalues objectAtIndex:thisImageNumber] doubleValue];
-    double netred = [[redvalues objectAtIndex:thisImageNumber] doubleValue];
+    //double netred = [[redvalues objectAtIndex:thisImageNumber] doubleValue];
+    //double netred = [[bluevalues objectAtIndex:thisImageNumber] doubleValue];
+    
+    NSArray* thisdata = [self getPixelAverages:input];
+    
+    double netred = [thisdata[0] doubleValue];
+    
     NSLog(@"Image %d has averages: \nRed: %f", imageNumber, netred);
-    //dose = -85.93420733 + 8.08522231*netred - 0.27978893*pow(netred, 2) +  6.46083385*pow(10, -3)*pow(netred, 3)  - 6.69401931*pow(10, -5)*pow(netred, 4) +  2.66219494*pow(10, -7)*pow(netred, 5);
     
     for (int i=0; i<=order; i++) {
         dose += coeffs[i]*pow(netred, i);

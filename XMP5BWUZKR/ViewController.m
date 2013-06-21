@@ -8,15 +8,16 @@
 
 #import "ViewController.h"
 #import "ImageProcessing.h"
+#import "SharedData.h"
 
 @interface ViewController () < UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
 @end
 
 @implementation ViewController
 CIContext *context;
 CIImage *beginImage;
 CIImage *currentImage;
-@synthesize popoverController;
 CGRect selectionRect;
 NSMutableArray *points;
 float widthscale;
@@ -25,10 +26,11 @@ float currentslidervalue;
 CAShapeLayer *rectLayer;
 UIAlertView* newFileDialog;
 UIImagePickerController* imagePicker;
+@synthesize popoverController;
 
 double currentDose;
-
 bool fileCreated;
+bool isPreppedForCalibration;
 
 //Declare Custom Tools
 ImageProcessing* imageProcessor;
@@ -60,7 +62,7 @@ ImageProcessing* imageProcessor;
     [singleTapGesture setNumberOfTouchesRequired:1];
     [self.imageView addGestureRecognizer:singleTapGesture];
     
-    [self initializePointArray:points];
+    [self initializePointArray];
     
     widthscale = self.imageView.image.size.width/484;
     heightscale = self.imageView.image.size.height/648;
@@ -79,9 +81,17 @@ ImageProcessing* imageProcessor;
     
     currentDose = 0;
     
+    self.calibrationLabel.hidden = TRUE;
+    self.calibrationButton.hidden = TRUE;
+    self.calibrationDoseBox.hidden = TRUE;
+    
+    [[self calibrationDoseBox] setKeyboardType:UIKeyboardTypeNumberPad];
+    self.calibrationDoseBox.clearsOnBeginEditing = TRUE;
+    
     //Initialize Custom Tools
     imageProcessor = [[ImageProcessing alloc]init];
     
+    isPreppedForCalibration = FALSE;
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,17 +100,17 @@ ImageProcessing* imageProcessor;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)initializePointArray:(NSMutableArray *)thearray
+- (void)initializePointArray
 {
     points = nil;
     
-    thearray = [NSMutableArray arrayWithCapacity:2];
+    NSMutableArray* tempearray = [[NSMutableArray alloc] initWithCapacity:2];
     
     for(NSUInteger i=0; i<2; i++){
-        [thearray insertObject:[NSValue valueWithCGPoint:CGPointMake(-1, -1)] atIndex:i];
+        [tempearray insertObject:[NSValue valueWithCGPoint:CGPointMake(-1, -1)] atIndex:i];
     }
     
-    points = thearray;
+    points = tempearray;
     
     NSString *thepoint = [NSString stringWithFormat:@"Points: %@\n            %@", NSStringFromCGPoint([[points objectAtIndex:0] CGPointValue]), NSStringFromCGPoint([[points objectAtIndex:1] CGPointValue])];
     [[self pointLabel]setText:thepoint];
@@ -110,10 +120,19 @@ ImageProcessing* imageProcessor;
 {
     float slideValue = slider.value;
     
-    CIImage *outputImage = [imageProcessor grayPhoto:currentImage withAmount:slideValue];
+    //CIImage *outputImage = [imageProcessor grayPhoto:currentImage withAmount:slideValue];
     
-    CGImageRef cgimg = [context createCGImage:outputImage
-                                     fromRect:[outputImage extent]];
+    //CGImageRef cgimg = [context createCGImage:outputImage fromRect:[outputImage extent]];
+    
+    //self.imageView.image = [UIImage imageWithCGImage:cgimg];
+    
+    CIFilter *monochrome = [CIFilter filterWithName:@"CIColorMonochrome"];
+    [monochrome setValue:[CIColor colorWithRed:1 green:1 blue:1 alpha:1] forKey:@"inputColor"];
+    [monochrome setValue:currentImage forKey:kCIInputImageKey];
+    [monochrome setValue:@(slideValue) forKey:@"inputIntensity"];
+    CIImage *outputImage = monochrome.outputImage;
+    
+    CGImageRef cgimg = [context createCGImage:outputImage fromRect:[outputImage extent]];
     
     self.imageView.image = [UIImage imageWithCGImage:cgimg];
     
@@ -137,7 +156,7 @@ ImageProcessing* imageProcessor;
     else{
         [self presentViewController:pickerC animated:YES completion:nil];
     }
-    [self initializePointArray:points];
+    [self initializePointArray];
     [self updateRect];
 }
 
@@ -181,8 +200,6 @@ ImageProcessing* imageProcessor;
 
 - (IBAction)takePicture:(id)sender
 {
-    
-    /*
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -192,11 +209,12 @@ ImageProcessing* imageProcessor;
     else{
         return;
     }
-*/
-    [self initializePointArray:points];
+     
+    [self initializePointArray];
     [self updateRect];
 }
 
+/*
 - (IBAction)getPixelInfo:(id)sender
 {
     if (fileCreated == FALSE) {
@@ -205,7 +223,8 @@ ImageProcessing* imageProcessor;
     }
     self.infoLabel.text = [imageProcessor getPixelAverages:self.imageView.image];
 }
-
+*/
+ 
 - (IBAction)getThatArea:(id)sender
 {
     widthscale = self.imageView.image.size.width/484;
@@ -226,7 +245,7 @@ ImageProcessing* imageProcessor;
     [self updateimage];
     CGImageRelease(imageRef);
     
-    [self initializePointArray:points];
+    [self initializePointArray];
     [self updateRect];
 }
 
@@ -250,7 +269,7 @@ ImageProcessing* imageProcessor;
     self.amountSlider.value = 0;
     currentImage = beginImage;
     [self updateimage];
-    [self initializePointArray:points];
+    [self initializePointArray];
     [self updateRect];
 }
 
@@ -278,7 +297,7 @@ ImageProcessing* imageProcessor;
 
 - (IBAction)closeFile:(id)sender {
     [imageProcessor closeFile];
-    self.infoLabel.text = @"File Closed!";
+    //self.infoLabel.text = @"File Closed!";
     fileCreated = FALSE;
 }
 
@@ -317,7 +336,6 @@ ImageProcessing* imageProcessor;
 - (void)updateRect
 {
     [rectLayer setPosition:CGPointMake(0, 0)];
-    
     NSValue *value1 = [points objectAtIndex:0];
     CGPoint point1 = value1.CGPointValue;
     NSValue *value2 = [points objectAtIndex:1];
@@ -342,7 +360,27 @@ ImageProcessing* imageProcessor;
 }
 
 - (IBAction)setCalibration:(id)sender {
-    [imageProcessor calibrate:self.imageView.image];
+    if(isPreppedForCalibration == FALSE){
+        [imageProcessor prepForCalibration];
+        isPreppedForCalibration = TRUE;
+    }
+    int displaynumber = [imageProcessor newcalibrate:self.imageView.image withDose:[self.calibrationDoseBox.text doubleValue]] + 1;
+    
+    if(displaynumber <= [[SharedData sharedData]getNumberOfPoints]){
+        self.calibrationLabel.text = [NSString stringWithFormat:@"Select Point %d", displaynumber];
+    }
+    
+    else{
+        self.calibrationLabel.text = @"Calibration Complete!";
+        [imageProcessor getNewCoefficients];
+        isPreppedForCalibration = FALSE;
+    }
+}
+
+- (IBAction)configureCalibration:(id)sender {
+    self.calibrationButton.hidden = FALSE;
+    self.calibrationLabel.hidden = FALSE;
+    self.calibrationDoseBox.hidden = FALSE;
 }
 
 - (IBAction)getDose:(id)sender {
@@ -350,4 +388,11 @@ ImageProcessing* imageProcessor;
     self.doseLabel.text = [NSString stringWithFormat:@"Dose: %f", currentDose];
 }
 
+- (IBAction)newCurve:(id)sender {
+    [imageProcessor prepForCalibration];
+    self.calibrationLabel.hidden = TRUE;
+    self.calibrationLabel.text = @"Select Point 1";
+    self.calibrationDoseBox.hidden = TRUE;
+    self.calibrationButton.hidden = TRUE;
+}
 @end
