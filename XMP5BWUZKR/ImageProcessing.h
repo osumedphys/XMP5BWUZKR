@@ -38,7 +38,7 @@
 
 - (void)prepForCalibration;
 
-- (int)newcalibrate:(UIImage*)input withDose:(double)d;
+- (int)newcalibrate:(UIImage*)input;
 
 - (void)getNewCoefficients;
 

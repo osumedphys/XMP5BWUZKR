@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CalibrationPointsController : UITableViewController
+@interface CalibrationPointsController : UITableViewController <UIAlertViewDelegate>
+
+- (IBAction)setDefaults:(id)sender;
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+
+- (void)changePointNumber:(int)newNoOfPoints;
+- (void)changeCurveOrder:(int)newOrder;
+- (void)changeRowValue:(int)rowNumber withValue:(int)value;
+- (void)insertRows:(int)numberOfRows;
+- (void)deleteRows:(int)numberOfRows;
+- (void)changeCurveName:(NSString*)newName;
 
 @end

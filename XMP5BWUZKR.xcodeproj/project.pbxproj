@@ -19,7 +19,6 @@
 		91632B17172044E0008A8793 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91632B16172044E0008A8793 /* QuartzCore.framework */; };
 		91632B4F173AC2DD008A8793 /* ImageProcessing.mm in Sources */ = {isa = PBXBuildFile; fileRef = 91632B4E173AC2DD008A8793 /* ImageProcessing.mm */; };
 		91632B51173AD68F008A8793 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91632B50173AD68F008A8793 /* MessageUI.framework */; };
-		917610C917695EED0049570F /* CalibrationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 917610C817695EED0049570F /* CalibrationController.m */; };
 		917610D6176A0EB80049570F /* SharedData.mm in Sources */ = {isa = PBXBuildFile; fileRef = 917610D5176A0EB80049570F /* SharedData.mm */; };
 		91AC218817414F340091C0D7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC218717414F340091C0D7 /* AVFoundation.framework */; };
 		91AC21BC174527620091C0D7 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC21BB174527620091C0D7 /* MediaPlayer.framework */; };
@@ -62,8 +61,6 @@
 		91632B4D173AC2DD008A8793 /* ImageProcessing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageProcessing.h; sourceTree = "<group>"; };
 		91632B4E173AC2DD008A8793 /* ImageProcessing.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageProcessing.mm; sourceTree = "<group>"; };
 		91632B50173AD68F008A8793 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		917610C717695EED0049570F /* CalibrationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalibrationController.h; sourceTree = "<group>"; };
-		917610C817695EED0049570F /* CalibrationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalibrationController.m; sourceTree = "<group>"; };
 		917610D4176A0EB80049570F /* SharedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedData.h; sourceTree = "<group>"; };
 		917610D5176A0EB80049570F /* SharedData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SharedData.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		91AC218717414F340091C0D7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -145,8 +142,6 @@
 				912984FE17454E080040F875 /* AVCamDemoViewController.h */,
 				912984FF17454E080040F875 /* AVCamDemoViewController.m */,
 				9129850617454E380040F875 /* AVCamDemoViewController.xib */,
-				917610C717695EED0049570F /* CalibrationController.h */,
-				917610C817695EED0049570F /* CalibrationController.m */,
 				91D1598E171DABBA003313E0 /* ViewController.h */,
 				91D1598F171DABBA003313E0 /* ViewController.m */,
 				91D15988171DABBA003313E0 /* MainStoryboard_iPhone.storyboard */,
@@ -303,7 +298,6 @@
 				91D15990171DABBA003313E0 /* ViewController.m in Sources */,
 				91632B4F173AC2DD008A8793 /* ImageProcessing.mm in Sources */,
 				91EDCD38175E531A002D00F6 /* CurveFit.cpp in Sources */,
-				917610C917695EED0049570F /* CalibrationController.m in Sources */,
 				917610D6176A0EB80049570F /* SharedData.mm in Sources */,
 				9110833417737B8F009B7E26 /* CalibrationPointsController.m in Sources */,
 			);

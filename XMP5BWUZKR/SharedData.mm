@@ -10,8 +10,8 @@
 
 @implementation SharedData
 
-int numberOfPoints = 8;
-int orderNumber = 5;
+int numberOfPoints = 7;
+int orderNumber = 6;
 
 double* xvalues;
 double* yvalues;
@@ -21,6 +21,7 @@ double* yvalues;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedName = [[SharedData alloc] init];
+        [sharedName setNumberOfPoints:numberOfPoints];
     });
     return sharedName;
 }
@@ -39,6 +40,10 @@ double* yvalues;
 
 -(void)setyvalues:(double*)newys{
     yvalues = newys;
+}
+
+-(void)setYValue:(double)y atIndex:(int)index{
+    yvalues[index] = y;
 }
 
 -(double*)getxvalues{

@@ -38,6 +38,9 @@ ImageProcessing* imageProcessor;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationController.toolbarHidden = TRUE;
+    
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_0005" ofType:@"jpg"];
     NSURL *fileNameAndPath = [NSURL fileURLWithPath:filePath];
     
@@ -81,17 +84,11 @@ ImageProcessing* imageProcessor;
     
     currentDose = 0;
     
-    self.calibrationLabel.hidden = TRUE;
-    self.calibrationButton.hidden = TRUE;
-    self.calibrationDoseBox.hidden = TRUE;
-    
-    [[self calibrationDoseBox] setKeyboardType:UIKeyboardTypeNumberPad];
-    self.calibrationDoseBox.clearsOnBeginEditing = TRUE;
+    self.navigationController.toolbarHidden = FALSE;
+    isPreppedForCalibration = FALSE;
     
     //Initialize Custom Tools
     imageProcessor = [[ImageProcessing alloc]init];
-    
-    isPreppedForCalibration = FALSE;
 }
 
 - (void)didReceiveMemoryWarning
@@ -364,7 +361,7 @@ ImageProcessing* imageProcessor;
         [imageProcessor prepForCalibration];
         isPreppedForCalibration = TRUE;
     }
-    int displaynumber = [imageProcessor newcalibrate:self.imageView.image withDose:[self.calibrationDoseBox.text doubleValue]] + 1;
+    int displaynumber = [imageProcessor newcalibrate:self.imageView.image] + 1;
     
     if(displaynumber <= [[SharedData sharedData]getNumberOfPoints]){
         self.calibrationLabel.text = [NSString stringWithFormat:@"Select Point %d", displaynumber];
@@ -372,15 +369,10 @@ ImageProcessing* imageProcessor;
     
     else{
         self.calibrationLabel.text = @"Calibration Complete!";
+        self.calibrationButton.hidden = TRUE;
         [imageProcessor getNewCoefficients];
         isPreppedForCalibration = FALSE;
     }
-}
-
-- (IBAction)configureCalibration:(id)sender {
-    self.calibrationButton.hidden = FALSE;
-    self.calibrationLabel.hidden = FALSE;
-    self.calibrationDoseBox.hidden = FALSE;
 }
 
 - (IBAction)getDose:(id)sender {
@@ -392,7 +384,6 @@ ImageProcessing* imageProcessor;
     [imageProcessor prepForCalibration];
     self.calibrationLabel.hidden = TRUE;
     self.calibrationLabel.text = @"Select Point 1";
-    self.calibrationDoseBox.hidden = TRUE;
     self.calibrationButton.hidden = TRUE;
 }
 @end

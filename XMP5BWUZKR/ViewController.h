@@ -34,13 +34,11 @@
 - (void)updateimage;
 - (void)updateRect;
 - (IBAction)setCalibration:(id)sender;
-- (IBAction)configureCalibration:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *calibrationButton;
 @property (weak, nonatomic) IBOutlet UILabel *calibrationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *doseLabel;
 - (IBAction)getDose:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UITextField *calibrationDoseBox;
 - (IBAction)newCurve:(id)sender;
 
 

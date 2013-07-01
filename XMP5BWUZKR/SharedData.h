@@ -16,6 +16,9 @@
 
 -(void)setxvalues:(double*)newxs;
 -(void)setyvalues:(double*)newys;
+
+-(void)setYValue:(double)y atIndex:(int)index;
+
 -(double*)getxvalues;
 -(double*)getyvalues;
 

@@ -164,12 +164,10 @@ CurveFit* myfit;
     imageNumber = 0;
 }
 
-- (int)newcalibrate:(UIImage*)input withDose:(double)d{
+- (int)newcalibrate:(UIImage*)input{
     NSArray* averages = [self getPixelAverages:input];
     double currentRed = [averages[0] doubleValue];
-    //[[SharedData sharedData]getPoints][imageNumber] = [NSValue valueWithCGPoint:CGPointMake(currentRed, d)];
     [[SharedData sharedData]getxvalues][imageNumber] = currentRed;
-    [[SharedData sharedData]getyvalues][imageNumber] = d;
     int displayedImageNumber = ++imageNumber;
     return displayedImageNumber;
 }
