@@ -41,7 +41,7 @@ ImageProcessing* imageProcessor;
     
     self.navigationController.toolbarHidden = TRUE;
     
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"IMG_0005" ofType:@"jpg"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Logo" ofType:@"jpg"];
     NSURL *fileNameAndPath = [NSURL fileURLWithPath:filePath];
     
     beginImage = [CIImage imageWithContentsOfURL:fileNameAndPath];
@@ -86,6 +86,8 @@ ImageProcessing* imageProcessor;
     
     self.navigationController.toolbarHidden = FALSE;
     isPreppedForCalibration = FALSE;
+    
+    self.calibrationLabel.text = [NSString stringWithFormat:@"Select Point %d", (int)[[SharedData sharedData]getYatIndex:0]];
     
     //Initialize Custom Tools
     imageProcessor = [[ImageProcessing alloc]init];
@@ -332,14 +334,15 @@ ImageProcessing* imageProcessor;
 
 - (void)updateRect
 {
-    [rectLayer setPosition:CGPointMake(0, 0)];
+    [rectLayer setPosition:CGPointMake(self.imageView.frame.origin.x+100, self.imageView.frame.origin.y+250)];
     NSValue *value1 = [points objectAtIndex:0];
     CGPoint point1 = value1.CGPointValue;
     NSValue *value2 = [points objectAtIndex:1];
     CGPoint point2 = value2.CGPointValue;
     if (point1.x < point2.x) {
         selectionRect = CGRectMake((point1.x), (point1.y), (abs(point1.x - point2.x)), (abs(point1.y - point2.y)));
-    } else {
+    }
+    else {
         selectionRect = CGRectMake((point2.x), (point2.y), (abs(point1.x - point2.x)), (abs(point1.y - point2.y)));
     }
     
@@ -363,8 +366,13 @@ ImageProcessing* imageProcessor;
     }
     int displaynumber = [imageProcessor newcalibrate:self.imageView.image] + 1;
     
-    if(displaynumber <= [[SharedData sharedData]getNumberOfPoints]){
+    /*
+     if(displaynumber <= [[SharedData sharedData]getNumberOfPoints]){
         self.calibrationLabel.text = [NSString stringWithFormat:@"Select Point %d", displaynumber];
+    } */
+    
+    if(displaynumber <= [[SharedData sharedData]getNumberOfPoints]){
+        self.calibrationLabel.text = [NSString stringWithFormat:@"Select Point %d", (int)[[SharedData sharedData]getYatIndex:displaynumber-1]];
     }
     
     else{

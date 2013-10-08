@@ -21,6 +21,7 @@
 
 -(double*)getxvalues;
 -(double*)getyvalues;
+-(double)getYatIndex:(int)index;
 
 -(void)setNumberOfPoints:(int)newNumberOfPoints;
 -(void)setCurveOrder:(int)newCurveOrder;

@@ -54,6 +54,10 @@ double* yvalues;
     return yvalues;
 }
 
+-(double)getYatIndex:(int)index{
+    return yvalues[index];
+}
+
 -(void)setNumberOfPoints:(int)newNumberOfPoints{
     numberOfPoints = newNumberOfPoints;
     xvalues = new double[numberOfPoints];

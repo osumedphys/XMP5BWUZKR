@@ -25,6 +25,7 @@
 		91AC21BE174527760091C0D7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC21BD174527760091C0D7 /* CoreMedia.framework */; };
 		91AC21C01745277E0091C0D7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC21BF1745277E0091C0D7 /* CoreVideo.framework */; };
 		91AC21C2174527900091C0D7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AC21C1174527900091C0D7 /* MobileCoreServices.framework */; };
+		91ADBA381803B3AA00D09C1C /* Logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 91ADBA371803B3AA00D09C1C /* Logo.jpg */; };
 		91D15971171DABBA003313E0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D15970171DABBA003313E0 /* UIKit.framework */; };
 		91D15973171DABBA003313E0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D15972171DABBA003313E0 /* Foundation.framework */; };
 		91D15975171DABBA003313E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91D15974171DABBA003313E0 /* CoreGraphics.framework */; };
@@ -70,6 +71,7 @@
 		91AC21BD174527760091C0D7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		91AC21BF1745277E0091C0D7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		91AC21C1174527900091C0D7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		91ADBA371803B3AA00D09C1C /* Logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Logo.jpg; sourceTree = "<group>"; };
 		91D1596D171DABBA003313E0 /* XMP5BWUZKR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XMP5BWUZKR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		91D15970171DABBA003313E0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		91D15972171DABBA003313E0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -206,6 +208,7 @@
 		91D15977171DABBA003313E0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				91ADBA371803B3AA00D09C1C /* Logo.jpg */,
 				91D1597F171DABBA003313E0 /* AppDelegate.h */,
 				91D15980171DABBA003313E0 /* AppDelegate.m */,
 				91D15978171DABBA003313E0 /* XMP5BWUZKR-Info.plist */,
@@ -272,6 +275,7 @@
 			files = (
 				91D1597B171DABBA003313E0 /* InfoPlist.strings in Resources */,
 				91D15983171DABBA003313E0 /* Default.png in Resources */,
+				91ADBA381803B3AA00D09C1C /* Logo.jpg in Resources */,
 				91D15985171DABBA003313E0 /* Default@2x.png in Resources */,
 				91D15987171DABBA003313E0 /* Default-568h@2x.png in Resources */,
 				91D1598A171DABBA003313E0 /* MainStoryboard_iPhone.storyboard in Resources */,
